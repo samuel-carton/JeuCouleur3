@@ -22,6 +22,8 @@ public class JeuCouleur3 {
         System.out.println("Caught in the land slide ...");
         System.out.println("C'est pas vrai !");
         
+        Fenetre fen = new Fenetre();
+        fen.setVisible(true);
     }
     
 }
