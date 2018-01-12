@@ -19,6 +19,7 @@ public class JeuCouleur3 {
         
         System.out.println("Is this the real life ?");
         System.out.println("Is this just fantasy ?");
+        System.out.println("Caught in the land slide ...");
         
     }
     
