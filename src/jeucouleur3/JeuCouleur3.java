@@ -22,8 +22,15 @@ public class JeuCouleur3 {
         System.out.println("Caught in the land slide ...");
         System.out.println("C'est pas vrai !");
         
-        Fenetre fen = new Fenetre();
+        Partie p = new Partie();
+        Fenetre fen = new Fenetre(p);
         fen.setVisible(true);
+        boolean continuer = true;
+        fen.RentrerNomJoueur(1);
+        while (!p.isNomJoueurInitialized(1)){
+            
+        }
+        fen.RentrerNomJoueur(2);
     }
     
 }
