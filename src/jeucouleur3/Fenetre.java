@@ -34,13 +34,19 @@ public class Fenetre extends JFrame implements ActionListener{
     // Pour rentrer le nom
     private JLabel labelRentrerNomJoueur;
     private JTextField rentrerNomJoueurField;
-    private JButton rentrerNomJoueurButton;
+    private JButton rentrerNomJoueurButton1;
+    private JButton rentrerNomJoueurButton2;
+    
+    // Dans le hub
+    private JLabel labelNomJoueur1;
+    private JLabel labelNomJoueur2;
     
     public Fenetre(Partie p){
         setSize(500,500);
         setTitle("Puissance 3 !! Alignez-en trois, et c'est gagné !");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         instanciation();
+        this.partie = p;
     }
     
     private void instanciation(){
@@ -50,8 +56,11 @@ public class Fenetre extends JFrame implements ActionListener{
         c = getContentPane(); // Container
         labelRentrerNomJoueur = new JLabel();
         rentrerNomJoueurField = new JTextField(20);
-        rentrerNomJoueurButton = new JButton("GO !");
+        rentrerNomJoueurButton1 = new JButton("GO !");
+        rentrerNomJoueurButton2 = new JButton("GO !");
         
+        labelNomJoueur1 = new JLabel();
+        labelNomJoueur2 = new JLabel();
         
         // Layout
         GridBagLayout gbd = new GridBagLayout();
@@ -61,7 +70,8 @@ public class Fenetre extends JFrame implements ActionListener{
         // Placement
         
         // Action Listeners
-        rentrerNomJoueurButton.addActionListener(this);
+        rentrerNomJoueurButton1.addActionListener(this);
+        rentrerNomJoueurButton2.addActionListener(this);
         
         // Finalisation
         setContentPane(c);
@@ -87,13 +97,21 @@ public class Fenetre extends JFrame implements ActionListener{
     public void RentrerNomJoueur(int NbJoueur){
         c.removeAll();
         labelRentrerNomJoueur.setText("Rentrer le nom du Joueur " + NbJoueur);
+        rentrerNomJoueurField.setText("");
         cst.gridx = 0;
         cst.gridy = 0;
         c.add(labelRentrerNomJoueur, cst);
         cst.gridy = 1;
         c.add(rentrerNomJoueurField, cst);
         cst.gridy = 2;
-        c.add(rentrerNomJoueurButton, cst);
+        if ( NbJoueur == 1 ){
+            c.add(rentrerNomJoueurButton1, cst);
+        }
+        if ( NbJoueur == 2 ){
+            c.add(rentrerNomJoueurButton2, cst);
+        }
+        this.revalidate();
+        this.repaint();
     }
     
     public void setPartie(Partie partie){
@@ -102,8 +120,25 @@ public class Fenetre extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        if ( ae.getSource() == rentrerNomJoueurButton ){
-            
+        if ( ae.getSource() == rentrerNomJoueurButton1 ){
+            partie.setJoueur1(new Joueur(rentrerNomJoueurField.getText()));
         }
+        if ( ae.getSource() == rentrerNomJoueurButton2 ){
+            partie.setJoueur2(new Joueur(rentrerNomJoueurField.getText()));
+        }
+    }
+    
+    public void AffichageHub(){
+        c.removeAll();
+        
+        this.labelNomJoueur1.setText(this.partie.getJoueur1().getNom());
+        this.labelNomJoueur2.setText(this.partie.getJoueur2().getNom());
+        cst.gridx = 0;
+        cst.gridy = 0;
+        c.add(labelNomJoueur1, cst);
+        cst.gridy = 1;
+        c.add(labelNomJoueur2, cst);
+        this.revalidate();
+        this.repaint();
     }
 }

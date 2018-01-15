@@ -45,10 +45,10 @@ public class Partie {
             }
         }
         if ( NbJoueur == 2){
-            if ( joueur1 == null ){
+            if ( joueur2 == null ){
                 return false;
             }
-            if ( joueur1.getNom() == null ){
+            if ( joueur2.getNom() == null ){
                 return false;
             }
         }

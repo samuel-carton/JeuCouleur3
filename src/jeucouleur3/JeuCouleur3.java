@@ -31,6 +31,10 @@ public class JeuCouleur3 {
             
         }
         fen.RentrerNomJoueur(2);
+        while (!p.isNomJoueurInitialized(2)){
+            
+        }
+        fen.AffichageHub();
     }
     
 }
