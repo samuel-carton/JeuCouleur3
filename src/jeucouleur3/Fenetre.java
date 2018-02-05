@@ -139,17 +139,17 @@ public class Fenetre extends JFrame implements ActionListener{
         }
     }
     
-    public void AffichageHub(){
-        c.removeAll();
-        
-        this.labelNomJoueur1.setText(this.partie.getJoueur1().getNom());
-        this.labelNomJoueur2.setText(this.partie.getJoueur2().getNom());
-        cst.gridx = 0;
-        cst.gridy = 0;
-        c.add(labelNomJoueur1, cst);
-        cst.gridy = 1;
-        c.add(labelNomJoueur2, cst);
-        this.revalidate();
+ 
+    public void AffichagePartie() {
+    	c.removeAll();
+    	
+    	this.labelNomJoueur1.setText(this.partie.getJoueur1().getNom());
+    	c.add(labelNomJoueur1,0,0);
+    	
+    	this.labelNomJoueur2.setText(this.partie.getJoueur2().getNom());
+    	c.add(labelNomJoueur2,0,1);
+    	
+    	this.revalidate();
         this.repaint();
     }
 }
