@@ -12,13 +12,18 @@ package jeucouleur3;
 public class Joueur {
     private String nom;
     private String couleurAttribuee;
-    private boolean isHuman;
+    private boolean Human;
     
-    public Joueur(String nom, boolean isHuman){
+    public Joueur(String nom, boolean Human){
         this.nom = nom;
-        this.isHuman = isHuman;
+        this.Human = Human;
     }
 
+    public Joueur(boolean Human) {
+        this.Human = Human;
+    }
+    
+    
     public String getNom() {
         return nom;
     }
@@ -31,12 +36,12 @@ public class Joueur {
         this.nom = nom;
     }
 
-    public boolean isIsHuman() {
-        return isHuman;
+    public boolean isHuman() {
+        return Human;
     }
 
-    public void setIsHuman(boolean isHuman) {
-        this.isHuman = isHuman;
+    public void setHuman(boolean isHuman) {
+        this.Human = isHuman;
     }
     
     

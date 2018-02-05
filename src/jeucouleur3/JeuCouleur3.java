@@ -22,16 +22,9 @@ public class JeuCouleur3 {
         System.out.println("Caught in the land slide ...");
         System.out.println("C'est pas vrai !");
         
-        Partie p = new Partie();
-        Fenetre fen = new Fenetre(p);
-        fen.setVisible(true);
-        boolean continuer = true;
-        fen.initJoueurs();
-        
-        while ( continuer ){
-            // Boucle infinie
-            // Si victoire/défaite ==> continuer = false
-        }
+        Partie game = new Partie();
+        while ( !game.isJoueursInitialized() ){}
+        game.start();
     }
     
 }

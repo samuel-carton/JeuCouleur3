@@ -32,8 +32,11 @@ public class Fenetre extends JFrame implements ActionListener{
     private JLabel[][] grilleGraphique;
     
     // Pour rentrer le nom
-    private JLabel labelRentrerNomJoueur;
-    private JTextField rentrerNomJoueurField;
+    private JLabel labelRentrerNomJoueur1;
+    private JLabel labelRentrerNomJoueur2;
+    private JTextField rentrerNomJoueur1Field;
+    private JTextField rentrerNomJoueur2Field;
+    private JButton rentrerNomJoueursSubmit;
     
     // Dans le hub
     private JLabel labelNomJoueur1;
@@ -49,6 +52,7 @@ public class Fenetre extends JFrame implements ActionListener{
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         instanciation();
         this.partie = p;
+        this.setVisible(true);
     }
     
     private void instanciation(){
@@ -56,8 +60,11 @@ public class Fenetre extends JFrame implements ActionListener{
         // Allocation
         placeholdingy = new JLabel("Je ne sers à rien !");
         c = getContentPane(); // Container
-        labelRentrerNomJoueur = new JLabel();
-        rentrerNomJoueurField = new JTextField(20);
+        labelRentrerNomJoueur1 = new JLabel("Player One");
+        labelRentrerNomJoueur2 = new JLabel("Player Two");
+        rentrerNomJoueur1Field = new JTextField(20);
+        rentrerNomJoueur2Field = new JTextField(20);
+        rentrerNomJoueursSubmit = new JButton("Valider");
         
         labelNomJoueur1 = new JLabel();
         labelNomJoueur2 = new JLabel();
@@ -77,6 +84,7 @@ public class Fenetre extends JFrame implements ActionListener{
         // Action Listeners
         partieContreAI.addActionListener(this);
         partieEntre2Joueurs.addActionListener(this);
+        rentrerNomJoueursSubmit.addActionListener(this);
         
         // Finalisation
         setContentPane(c);
@@ -117,12 +125,28 @@ public class Fenetre extends JFrame implements ActionListener{
     
     
     // TODO
-    private void rentrerNomJoueurs(boolean isThereAnyAIOutThere){
-        if (isThereAnyAIOutThere){
-            
-        }else{
-            
+    public void rentrerNomJoueurs(){
+        c.removeAll();
+        cst.gridx = 0;
+        cst.gridy = 0;
+        c.add(this.labelRentrerNomJoueur1, cst);
+        cst.gridx = 1;
+        c.add(this.labelRentrerNomJoueur2, cst);
+        cst.gridx = 0;
+        cst.gridy = 1;
+        c.add(this.rentrerNomJoueur1Field, cst);
+        if ( !this.partie.getJoueur1().isHuman() ){
+            rentrerNomJoueur1Field.setText(this.partie.getJoueur1().getNom());
+            rentrerNomJoueur1Field.setEditable(false);
         }
+        cst.gridx = 1;
+        c.add(this.rentrerNomJoueur2Field, cst);
+        cst.gridx = 0;
+        cst.gridy = 2;
+        c.add(this.rentrerNomJoueursSubmit, cst);
+        this.setContentPane(c);
+        this.revalidate();
+        this.repaint();
     }
     
     public void setPartie(Partie partie){
@@ -133,9 +157,15 @@ public class Fenetre extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == partieContreAI){
             System.out.println("Vous avez choisi une partie contre un Ordinateur !");
+            this.partie.initJoueurs(true);
         }
         if (ae.getSource() == partieEntre2Joueurs){
             System.out.println("Vous avez choisi une partie entre deux joueurs, que le meilleur gagne !");
+            this.partie.initJoueurs(false);
+        }
+        
+        if (ae.getSource() == rentrerNomJoueursSubmit){
+            this.partie.initNomJoueurs(rentrerNomJoueur1Field.getText(), rentrerNomJoueur2Field.getText());
         }
     }
     
@@ -144,11 +174,14 @@ public class Fenetre extends JFrame implements ActionListener{
     	c.removeAll();
     	
     	this.labelNomJoueur1.setText(this.partie.getJoueur1().getNom());
-    	c.add(labelNomJoueur1,0,0);
+        cst.gridx = 0;
+        cst.gridy = 0;
+    	c.add(labelNomJoueur1, cst);
     	
     	this.labelNomJoueur2.setText(this.partie.getJoueur2().getNom());
-    	c.add(labelNomJoueur2,0,1);
-    	
+    	cst.gridx = 1;
+        c.add(labelNomJoueur2, cst);
+    	this.setContentPane(c);
     	this.revalidate();
         this.repaint();
     }
