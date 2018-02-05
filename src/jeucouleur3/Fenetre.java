@@ -34,8 +34,6 @@ public class Fenetre extends JFrame implements ActionListener{
     // Pour rentrer le nom
     private JLabel labelRentrerNomJoueur;
     private JTextField rentrerNomJoueurField;
-    private JButton rentrerNomJoueurButton1;
-    private JButton rentrerNomJoueurButton2;
     
     // Dans le hub
     private JLabel labelNomJoueur1;
@@ -60,8 +58,6 @@ public class Fenetre extends JFrame implements ActionListener{
         c = getContentPane(); // Container
         labelRentrerNomJoueur = new JLabel();
         rentrerNomJoueurField = new JTextField(20);
-        rentrerNomJoueurButton1 = new JButton("GO !");
-        rentrerNomJoueurButton2 = new JButton("GO !");
         
         labelNomJoueur1 = new JLabel();
         labelNomJoueur2 = new JLabel();
@@ -79,8 +75,6 @@ public class Fenetre extends JFrame implements ActionListener{
         // Placement
         
         // Action Listeners
-        rentrerNomJoueurButton1.addActionListener(this);
-        rentrerNomJoueurButton2.addActionListener(this);
         partieContreAI.addActionListener(this);
         partieEntre2Joueurs.addActionListener(this);
         
@@ -122,18 +116,21 @@ public class Fenetre extends JFrame implements ActionListener{
     }
     
     
+    // TODO
+    private void rentrerNomJoueurs(boolean isThereAnyAIOutThere){
+        if (isThereAnyAIOutThere){
+            
+        }else{
+            
+        }
+    }
+    
     public void setPartie(Partie partie){
         this.partie = partie;
     }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        if ( ae.getSource() == rentrerNomJoueurButton1 ){
-            partie.setJoueur1(new Joueur(rentrerNomJoueurField.getText()));
-        }
-        if ( ae.getSource() == rentrerNomJoueurButton2 ){
-            partie.setJoueur2(new Joueur(rentrerNomJoueurField.getText()));
-        }
         if (ae.getSource() == partieContreAI){
             System.out.println("Vous avez choisi une partie contre un Ordinateur !");
         }

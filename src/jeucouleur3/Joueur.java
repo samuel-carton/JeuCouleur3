@@ -14,8 +14,9 @@ public class Joueur {
     private String couleurAttribuee;
     private boolean isHuman;
     
-    public Joueur(String nom){
+    public Joueur(String nom, boolean isHuman){
         this.nom = nom;
+        this.isHuman = isHuman;
     }
 
     public String getNom() {

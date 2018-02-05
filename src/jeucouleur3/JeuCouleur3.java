@@ -27,6 +27,11 @@ public class JeuCouleur3 {
         fen.setVisible(true);
         boolean continuer = true;
         fen.initJoueurs();
+        
+        while ( continuer ){
+            // Boucle infinie
+            // Si victoire/défaite ==> continuer = false
+        }
     }
     
 }
