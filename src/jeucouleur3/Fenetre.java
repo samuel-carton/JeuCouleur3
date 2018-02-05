@@ -42,8 +42,8 @@ public class Fenetre extends JFrame implements ActionListener{
     private JLabel labelNomJoueur2;
     
     // Type de parties
-    private JButton partieAvecAI;
-    private JButton partieAvecJoueurs;
+    private JButton partieContreAI;
+    private JButton partieEntre2Joueurs;
     
     public Fenetre(Partie p){
         setSize(500,500);
@@ -66,6 +66,11 @@ public class Fenetre extends JFrame implements ActionListener{
         labelNomJoueur1 = new JLabel();
         labelNomJoueur2 = new JLabel();
         
+        // Choix de partie
+        partieContreAI = new JButton("Partie avec AI");
+        partieEntre2Joueurs = new JButton("Partie avec Joueurs");
+        
+        
         // Layout
         GridBagLayout gbd = new GridBagLayout();
         cst = new GridBagConstraints();
@@ -76,6 +81,8 @@ public class Fenetre extends JFrame implements ActionListener{
         // Action Listeners
         rentrerNomJoueurButton1.addActionListener(this);
         rentrerNomJoueurButton2.addActionListener(this);
+        partieContreAI.addActionListener(this);
+        partieEntre2Joueurs.addActionListener(this);
         
         // Finalisation
         setContentPane(c);
@@ -103,13 +110,12 @@ public class Fenetre extends JFrame implements ActionListener{
     public void initJoueurs(){
         c.removeAll();
         
-        partieAvecAI = new JButton("Partie avec AI");
-        partieAvecJoueurs = new JButton("Partie avec Joueurs");
+        
         cst.gridx = 0;
         cst.gridy = 0;
-        c.add(partieAvecAI, cst);
+        c.add(partieContreAI, cst);
         cst.gridy = 2;
-        c.add(partieAvecJoueurs, cst);
+        c.add(partieEntre2Joueurs, cst);
         this.setContentPane(c);
         this.revalidate();
         this.repaint();
@@ -127,6 +133,12 @@ public class Fenetre extends JFrame implements ActionListener{
         }
         if ( ae.getSource() == rentrerNomJoueurButton2 ){
             partie.setJoueur2(new Joueur(rentrerNomJoueurField.getText()));
+        }
+        if (ae.getSource() == partieContreAI){
+            System.out.println("Vous avez choisi une partie contre un Ordinateur !");
+        }
+        if (ae.getSource() == partieEntre2Joueurs){
+            System.out.println("Vous avez choisi une partie entre deux joueurs, que le meilleur gagne !");
         }
     }
     
