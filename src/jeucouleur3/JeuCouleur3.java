@@ -26,14 +26,7 @@ public class JeuCouleur3 {
         Fenetre fen = new Fenetre(p);
         fen.setVisible(true);
         boolean continuer = true;
-        fen.RentrerNomJoueur(1);
-        while (!p.isNomJoueurInitialized(1)){
-            
-        }
-        fen.RentrerNomJoueur(2);
-        while (!p.isNomJoueurInitialized(2)){
-            
-        }
+        
         fen.AffichageHub();
     }
     
