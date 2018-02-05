@@ -41,6 +41,10 @@ public class Fenetre extends JFrame implements ActionListener{
     private JLabel labelNomJoueur1;
     private JLabel labelNomJoueur2;
     
+    // Type de parties
+    private JButton partieAvecAI;
+    private JButton partieAvecJoueurs;
+    
     public Fenetre(Partie p){
         setSize(500,500);
         setTitle("Puissance 3 !! Alignez-en trois, et c'est gagné !");
@@ -94,25 +98,23 @@ public class Fenetre extends JFrame implements ActionListener{
             }
         }
     }
-    public void RentrerNomJoueur(int NbJoueur){
+    
+    
+    public void initJoueurs(){
         c.removeAll();
-        labelRentrerNomJoueur.setText("Rentrer le nom du Joueur " + NbJoueur);
-        rentrerNomJoueurField.setText("");
+        
+        partieAvecAI = new JButton("Partie avec AI");
+        partieAvecJoueurs = new JButton("Partie avec Joueurs");
         cst.gridx = 0;
         cst.gridy = 0;
-        c.add(labelRentrerNomJoueur, cst);
-        cst.gridy = 1;
-        c.add(rentrerNomJoueurField, cst);
+        c.add(partieAvecAI, cst);
         cst.gridy = 2;
-        if ( NbJoueur == 1 ){
-            c.add(rentrerNomJoueurButton1, cst);
-        }
-        if ( NbJoueur == 2 ){
-            c.add(rentrerNomJoueurButton2, cst);
-        }
+        c.add(partieAvecJoueurs, cst);
+        this.setContentPane(c);
         this.revalidate();
         this.repaint();
     }
+    
     
     public void setPartie(Partie partie){
         this.partie = partie;
