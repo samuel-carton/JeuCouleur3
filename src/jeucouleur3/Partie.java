@@ -51,10 +51,6 @@ public class Partie {
     }
     //</editor-fold>
     
-    public void jouerUnCoup(Joueur celuiQuiJoue){
-        
-    }
-    
     public void initJoueurs(boolean isThereAnyAI){
         if ( isThereAnyAI ){
             this.joueur1 = new Joueur("Bot McBottyFace", false);
@@ -76,5 +72,51 @@ public class Partie {
     
     public void start(){
         fen.AffichagePartie();
+        affichePartieConsole();
+        boolean continuer = true;
+        if ( Math.floor((Math.random()*2)) == 1 ){
+            starter = joueur1;
+        } else {
+            starter = joueur2;
+        }
+        turn = starter;
+    }
+    
+    public void jouerUnCoup(Joueur celuiQuiJoue, int NbColonne){
+        if ( verifCoup(NbColonne) ){
+            for( int i = 0; i < 6; i ++){
+                if ( this.plateau_de_jeu.getPion(NbColonne, i) == null){
+                    this.plateau_de_jeu.setPion(NbColonne, i, new Pion(this.turn.getCouleurAttribuee()));
+                }
+            }
+        }
+        // chercheCouleur3(); et vérification de la victoire
+        turn = (this.turn == joueur1)? joueur2 : joueur1;
+        fen.AffichagePartie();
+        affichePartieConsole();
+    }
+    
+    public boolean verifCoup(int NbColonne){
+        for ( int i = 0; i < 6; i++){
+            if ( this.plateau_de_jeu.getPion(NbColonne, i) == null ){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public void affichePartieConsole(){
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 6; j++) {
+                if ( this.plateau_de_jeu.getPion(i, j) == null){
+                    System.out.print("| ");
+                }else if (this.plateau_de_jeu.getPion(i, j).getCouleur().equals(joueur1.getCouleurAttribuee())){
+                    System.out.print("|X");
+                }else{
+                    System.out.print("|O");
+                }
+            }
+            System.out.println("|");
+        }
     }
 }
