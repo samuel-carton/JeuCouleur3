@@ -46,6 +46,9 @@ public class Fenetre extends JFrame implements ActionListener{
     private JButton partieContreAI;
     private JButton partieEntre2Joueurs;
     
+    // Boutons Colonnes
+    private JButton[] boutonsColonnes;
+    
     public Fenetre(Partie p){
         setSize(500,500);
         setTitle("Puissance 3 !! Alignez-en trois, et c'est gagné !");
@@ -79,12 +82,19 @@ public class Fenetre extends JFrame implements ActionListener{
         cst = new GridBagConstraints();
         c.setLayout(gbd);
         
-        // Placement
+        // Boutons Colonnes
+        boutonsColonnes = new JButton[6];
+        for (int i = 0; i < 6; i++) {
+            boutonsColonnes[i] = new JButton(Integer.toString(i));
+        }
         
         // Action Listeners
         partieContreAI.addActionListener(this);
         partieEntre2Joueurs.addActionListener(this);
         rentrerNomJoueursSubmit.addActionListener(this);
+        for (int i = 0; i < 6; i++) {
+            boutonsColonnes[i].addActionListener(this);
+        }
         
         // Finalisation
         setContentPane(c);
@@ -167,6 +177,13 @@ public class Fenetre extends JFrame implements ActionListener{
         if (ae.getSource() == rentrerNomJoueursSubmit){
             this.partie.initNomJoueurs(rentrerNomJoueur1Field.getText(), rentrerNomJoueur2Field.getText());
         }
+        
+        
+        
+        
+        for (int i = 0; i < 6; i++) {
+            if ( ae.getSource() == boutonsColonnes[i] ) partie.jouerUnCoup(i);
+        }
     }
     
  
@@ -176,11 +193,21 @@ public class Fenetre extends JFrame implements ActionListener{
     	this.labelNomJoueur1.setText(this.partie.getJoueur1().getNom());
         cst.gridx = 0;
         cst.gridy = 0;
+        cst.gridwidth = 3;
     	c.add(labelNomJoueur1, cst);
     	
     	this.labelNomJoueur2.setText(this.partie.getJoueur2().getNom());
-    	cst.gridx = 1;
+    	cst.gridx = 4;
+        cst.gridwidth = 3;
         c.add(labelNomJoueur2, cst);
+        
+        cst.gridy = 1;
+        cst.gridwidth = 1;
+        for (int i = 0; i < 6; i++) {
+            cst.gridx = i;
+            c.add(boutonsColonnes[i], cst);
+        }
+        
     	this.setContentPane(c);
     	this.revalidate();
         this.repaint();

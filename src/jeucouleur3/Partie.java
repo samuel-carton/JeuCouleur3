@@ -66,6 +66,8 @@ public class Partie {
     
     public void initNomJoueurs(String nomJoueur1, String nomJoueur2){
         this.joueur1.setNom(nomJoueur1);
+        this.joueur1.setCouleurAttribuee("Bleu");
+        this.joueur2.setCouleurAttribuee("Rouge");
         this.joueur2.setNom(nomJoueur2);
         this.joueursInitialized = true;
     }
@@ -84,9 +86,10 @@ public class Partie {
     
     public void jouerUnCoup(int NbColonne){
         if ( verifCoup(NbColonne) ){
-            for( int i = 6; i > 0; i --){
+            for( int i = 5; i >= 0; i --){
                 if ( this.plateau_de_jeu.getPion(NbColonne, i) == null){
                     this.plateau_de_jeu.setPion(NbColonne, i, new Pion(this.turn.getCouleurAttribuee()));
+                    break;
                 }
             }
             // chercheCouleur3(); et vérification de la victoire
@@ -116,11 +119,12 @@ public class Partie {
     }
     
     public void affichePartieConsole(){
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
-                if ( this.plateau_de_jeu.getPion(i, j) == null){
+                if ( this.plateau_de_jeu.getPion(j, i) == null){
                     System.out.print("| ");
-                }else if (this.plateau_de_jeu.getPion(i, j).getCouleur().equals(joueur1.getCouleurAttribuee())){
+                }else if (this.plateau_de_jeu.getPion(j, i).getCouleur().equals(joueur1.getCouleurAttribuee())){
                     System.out.print("|X");
                 }else{
                     System.out.print("|O");

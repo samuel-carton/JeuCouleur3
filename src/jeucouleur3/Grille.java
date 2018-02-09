@@ -6,6 +6,9 @@ public class Grille {
     // - Constructor
     public Grille() {
         plateau = new Pion[6][6];
+        for (int i = 0; i < 6; i++) {
+            plateau[i] = new Pion[6];
+        }
         //for (int i = 0; i < 6; i++) {
         //    for ( int j = 0; i < 6; i ++){
         //        plateau[i][j] = new Pion();

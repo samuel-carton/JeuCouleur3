@@ -32,6 +32,10 @@ public class Joueur {
         return couleurAttribuee;
     }
 
+    public void setCouleurAttribuee(String couleurAttribuee) {
+        this.couleurAttribuee = couleurAttribuee;
+    }
+
     public void setNom(String nom) {
         this.nom = nom;
     }
