@@ -10,6 +10,7 @@ import java.awt.Event;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -103,7 +104,9 @@ public class Fenetre extends JFrame implements ActionListener{
     public void SetupGrilleGraphique(){
         for( int i = 0; i < 6; i ++){
             for ( int j = 0; j < 6; i ++){
-                grilleGraphique[i][j] = new JLabel(this.grille.getPion(j, j).getCouleur());
+                grilleGraphique[i][j] = new JLabel();
+                if ( this.grille.getPion(i, j) != null )
+                    grilleGraphique[i][j].setBackground(this.grille.getPion(i, j).getCouleur());
             }
         }
     }

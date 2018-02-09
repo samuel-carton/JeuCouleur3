@@ -5,13 +5,15 @@
  */
 package jeucouleur3;
 
+import java.awt.Color;
+
 /**
  *
  * @author Loris
  */
 public class Joueur {
     private String nom;
-    private String couleurAttribuee;
+    private Color couleurAttribuee;
     private boolean Human;
     
     public Joueur(String nom, boolean Human){
@@ -28,11 +30,11 @@ public class Joueur {
         return nom;
     }
 
-    public String getCouleurAttribuee() {
+    public Color getCouleurAttribuee() {
         return couleurAttribuee;
     }
 
-    public void setCouleurAttribuee(String couleurAttribuee) {
+    public void setCouleurAttribuee(Color couleurAttribuee) {
         this.couleurAttribuee = couleurAttribuee;
     }
 

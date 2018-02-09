@@ -5,6 +5,7 @@
  */
 package jeucouleur3;
 
+import java.awt.Color;
 import java.util.Scanner;
 
 /**
@@ -66,8 +67,8 @@ public class Partie {
 
 	public void initNomJoueurs(String nomJoueur1, String nomJoueur2){
 		this.joueur1.setNom(nomJoueur1);
-		this.joueur1.setCouleurAttribuee("Bleu");
-		this.joueur2.setCouleurAttribuee("Rouge");
+		this.joueur1.setCouleurAttribuee(Color.BLUE);
+		this.joueur2.setCouleurAttribuee(Color.RED);
 		this.joueur2.setNom(nomJoueur2);
 		this.joueursInitialized = true;
 	}
@@ -148,7 +149,7 @@ public class Partie {
 		}
 		
 	}
-
+        }
 
 }
 
