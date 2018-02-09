@@ -5,7 +5,11 @@
  */
 package jeucouleur3;
 
+import java.sql.Time;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -103,9 +107,16 @@ public class Partie {
     }
     
     public void jouerAI(){
-        
-        // Jouer le tour de l'AI
-        turn = (this.turn == joueur1)? joueur2 : joueur1;
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        int i = 0;
+        while ( !verifCoup(i) ){
+            i ++;
+        }
+        jouerUnCoup(i);
     }
     
     public boolean verifCoup(int NbColonne){
