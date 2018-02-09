@@ -139,7 +139,7 @@ public class Partie {
 			for (int j = 0; j < 6; j++) {
 				if ( this.plateau_de_jeu.getPion(j, i) == null){
 					//rien
-				}
+				
 			}else if (this.plateau_de_jeu.getPion(j, i).getCouleur().equals(joueur1.getCouleurAttribuee())){
 				Jeton pionJ1 = new Jeton(j*10,i*10,plateau_de_jeu.getPion(j, i).getCouleur());
 			}else{

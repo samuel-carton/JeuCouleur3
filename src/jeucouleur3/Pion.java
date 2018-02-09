@@ -1,21 +1,23 @@
 package jeucouleur3;
 
+import java.awt.Color;
+
 public class Pion {
-    private String couleur;
+    private Color couleur;
 
     // - Constructors
     public Pion(){
         
     }
-    public Pion(String couleur) {
+    public Pion(Color couleur) {
         this.couleur = couleur;
     }
 
     // - Getters n' Setters
-    public String getCouleur() {
+    public Color getCouleur() {
         return couleur;
     }
-    public void setCouleur(String couleur) {
+    public void setCouleur(Color couleur) {
         this.couleur = couleur;
     }
 
