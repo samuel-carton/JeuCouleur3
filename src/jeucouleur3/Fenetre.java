@@ -30,7 +30,7 @@ public class Fenetre extends JFrame implements ActionListener{
     private Partie partie;
     
     // Grille de Label
-    private JLabel[][] grilleGraphique;
+    private Jeton[][] grilleGraphique;
     
     // Pour rentrer le nom
     private JLabel labelRentrerNomJoueur1;
@@ -73,6 +73,8 @@ public class Fenetre extends JFrame implements ActionListener{
         labelNomJoueur1 = new JLabel();
         labelNomJoueur2 = new JLabel();
         
+        SetupGrilleGraphique();
+        
         // Choix de partie
         partieContreAI = new JButton("Partie avec AI");
         partieEntre2Joueurs = new JButton("Partie avec Joueurs");
@@ -102,21 +104,32 @@ public class Fenetre extends JFrame implements ActionListener{
     }
     
     public void SetupGrilleGraphique(){
+        grilleGraphique = new Jeton[6][6];
+        for (int i = 0; i < 6; i++) {
+            grilleGraphique[i] = new Jeton[6];
+        }
         for( int i = 0; i < 6; i ++){
-            for ( int j = 0; j < 6; i ++){
-                grilleGraphique[i][j] = new JLabel();
-                if ( this.grille.getPion(i, j) != null )
-                    grilleGraphique[i][j].setBackground(this.grille.getPion(i, j).getCouleur());
+            for ( int j = 0; j < 6; j ++){
+                grilleGraphique[i][j] = new Jeton();
             }
         }
     }
     
     public void AffichageGrilleGraphique(){
+        // Refresh grille graphique
         for( int i = 0; i < 6; i ++){
-            for ( int j = 0; j < 6; i ++){
+            for ( int j = 0; j < 6; j ++){
+                if (this.partie.getPlateau_de_jeu().getPion(i, j) != null){
+                    grilleGraphique[i][j].setCouleur(this.partie.getPlateau_de_jeu().getPion(i, j).getCouleur());
+                }
+            }
+        }
+        // Affichage
+        for( int i = 0; i < 6; i ++){
+            for ( int j = 3; j < 9; j ++){
                 cst.gridx = i;
                 cst.gridy = j;
-                c.add(this.grilleGraphique[i][j], cst);
+                c.add(this.grilleGraphique[i][j-3], cst);
             }
         }
     }
@@ -211,6 +224,7 @@ public class Fenetre extends JFrame implements ActionListener{
             c.add(boutonsColonnes[i], cst);
         }
         
+        AffichageGrilleGraphique();
     	this.setContentPane(c);
     	this.revalidate();
         this.repaint();
