@@ -21,7 +21,7 @@ public class Partie {
     private Joueur joueur2;
     private Grille plateau_de_jeu;
 
-    private Joueur starter, turn;
+    private Joueur turn;
     private Joueur winner;
 
     private boolean joueursInitialized;
@@ -90,11 +90,13 @@ public class Partie {
         affichePartieConsole();
         boolean continuer = true;
         if (Math.floor((Math.random() * 2)) == 1) {
-            starter = joueur1;
+            turn = joueur1;
         } else {
-            starter = joueur2;
+            turn = joueur2;
         }
-        turn = starter;
+        if (turn.isHuman() == false) {
+            jouerAI();
+        }
     }
 
     public void jouerUnCoup(int NbColonne) {
@@ -116,17 +118,27 @@ public class Partie {
     }
 
     public void jouerAI() {
-        try {
-            TimeUnit.SECONDS.sleep(2);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
+        //fen.repaint();
+        //try {
+        //    
+        //    TimeUnit.SECONDS.sleep(1);
+        //} catch (InterruptedException ex) {
+        //    Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
+        //}
+        int tmpCol = 0;
+        while ( ! verifCoup(tmpCol) ){
+            tmpCol ++;
         }
-        int i = 0;
-        while ( ! verifCoup(i) ){
-            i ++;
+        for (int i = 5; i >= 0; i--) {
+            if (this.plateau_de_jeu.getPion(tmpCol, i) == null) {
+                this.plateau_de_jeu.setPion(tmpCol, i, new Pion(this.turn.getCouleurAttribuee()));
+                break;
+            }
         }
-        jouerUnCoup(i);
-        // Jouer le tour de l'AI
+        // chercheCouleur3(); et vérification de la victoire
+        turn = (this.turn == joueur1) ? joueur2 : joueur1;
+        fen.AffichagePartie();
+        affichePartieConsole();
     }
 
     public boolean verifCoup(int NbColonne) {
