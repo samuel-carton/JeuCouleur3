@@ -82,24 +82,34 @@ public class Partie {
         turn = starter;
     }
     
-    public void jouerUnCoup(Joueur celuiQuiJoue, int NbColonne){
+    public void jouerUnCoup(int NbColonne){
         if ( verifCoup(NbColonne) ){
-            for( int i = 0; i < 6; i ++){
+            for( int i = 6; i > 0; i --){
                 if ( this.plateau_de_jeu.getPion(NbColonne, i) == null){
                     this.plateau_de_jeu.setPion(NbColonne, i, new Pion(this.turn.getCouleurAttribuee()));
                 }
             }
+            // chercheCouleur3(); et vérification de la victoire
+            turn = (this.turn == joueur1)? joueur2 : joueur1;
+            fen.AffichagePartie();
+            affichePartieConsole();
+            if ( turn.isHuman() == false ){
+                jouerAI();
+            }
         }
-        // chercheCouleur3(); et vérification de la victoire
+    }
+    
+    public void jouerAI(){
+        
+        // Jouer le tour de l'AI
         turn = (this.turn == joueur1)? joueur2 : joueur1;
-        fen.AffichagePartie();
-        affichePartieConsole();
     }
     
     public boolean verifCoup(int NbColonne){
         for ( int i = 0; i < 6; i++){
             if ( this.plateau_de_jeu.getPion(NbColonne, i) == null ){
                 return true;
+                
             }
         }
         return false;
