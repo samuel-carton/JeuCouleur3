@@ -62,6 +62,10 @@ public class Jeu {
         return plateau_de_jeu;
     }
     
+    public Joueur getTurn() {
+    	return turn;
+    }
+    
     
     //</editor-fold>
 
