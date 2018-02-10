@@ -23,8 +23,8 @@ public class JeuCouleur3 {
         System.out.println("C'est pas vrai !");
         
         Jeu game = new Jeu();
-        while ( !game.isJoueursInitialized() ){}
-        game.start();
+        //while ( !game.isJoueursInitialized() ){}
+        //game.start();
     }
     
 }

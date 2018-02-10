@@ -83,6 +83,7 @@ public class Jeu {
         this.joueur2.setCouleurAttribuee(Color.RED);
         this.joueur2.setNom(nomJoueur2);
         this.joueursInitialized = true;
+        start();
     }
 
     public void start() {
