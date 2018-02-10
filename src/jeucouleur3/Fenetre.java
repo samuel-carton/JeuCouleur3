@@ -14,6 +14,7 @@ import java.awt.GridBagLayout;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -101,8 +102,9 @@ public class Fenetre extends JFrame implements ActionListener{
         
         // Boutons Colonnes
         boutonsColonnes = new JButton[6];
+        ImageIcon ic = new ImageIcon("src\\jeucouleur3\\fleche_bas.png");
         for (int i = 0; i < 6; i++) {
-            boutonsColonnes[i] = new JButton(Integer.toString(i));
+            boutonsColonnes[i] = new JButton(ic);
         }
         
         // Action Listeners
