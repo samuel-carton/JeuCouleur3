@@ -29,11 +29,13 @@ public class Jeu {
     private Fenetre fen;
     
     private Pion dernierPion;
+    private int nbCoupsJoues;
 
     public Jeu() {
         this.fen = new Fenetre(this);
         plateau_de_jeu = new Grille();
         this.dernierPion = new Pion();
+        this.nbCoupsJoues = 0;
         // Initialisation des joueurs
         this.joueursInitialized = false;
         fen.initJoueurs();
@@ -112,7 +114,7 @@ public class Jeu {
                 if (this.plateau_de_jeu.getPion(NbColonne, i) == null) {
                     dernierPion = new Pion(NbColonne, i, this.turn.getCouleurAttribuee());
                     this.plateau_de_jeu.setPion(NbColonne, i, new Pion(NbColonne, i, this.turn.getCouleurAttribuee()));
-                    
+                    nbCoupsJoues ++;
                     break;
                 }
             }
@@ -143,6 +145,7 @@ public class Jeu {
             if (this.plateau_de_jeu.getPion(tmpCol, i) == null) {
                 dernierPion = new Pion(tmpCol, i, this.turn.getCouleurAttribuee());
                 this.plateau_de_jeu.setPion(tmpCol, i, new Pion(tmpCol, i, this.turn.getCouleurAttribuee()));
+                nbCoupsJoues ++;
                 break;
             }
         }
