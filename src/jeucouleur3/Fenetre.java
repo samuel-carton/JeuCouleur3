@@ -226,7 +226,6 @@ public class Fenetre extends JFrame implements ActionListener{
         
         AffichageGrilleGraphique();
     	this.setContentPane(c);
-        this.validate();
     	this.revalidate();
         this.repaint();
     }
