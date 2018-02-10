@@ -14,6 +14,10 @@ import java.awt.GridBagLayout;
 import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -189,10 +193,14 @@ public class Fenetre extends JFrame implements ActionListener{
         
         
         // Choix des couleurs attribuées
-        Color tabColors[] = {Color.BLUE, Color.CYAN, Color.RED, Color.GREEN, Color.ORANGE, Color.PINK, Color.MAGENTA, Color.DARK_GRAY};
-        String tabColorsString[] = {"BLUE", "CYAN", "RED", "GREEN", "ORANGE", "PINK", "MAGENTA", "DARK_GRAY"};
-        colorChoiceJoueur1 = new JComboBox(tabColorsString);
-        colorChoiceJoueur2 = new JComboBox(tabColorsString);
+        // Color tabColors[] = {Color.BLUE, Color.CYAN, Color.RED, Color.GREEN, Color.ORANGE, Color.PINK, Color.MAGENTA, Color.DARK_GRAY};    -- cf. ActionPerformed
+        String tabColorsStringBase[] = {"BLUE", "CYAN", "RED", "GREEN", "ORANGE", "PINK", "MAGENTA", "DARK_GRAY"};
+        
+        
+        colorChoiceJoueur1 = new JComboBox(tabColorsStringBase);
+        colorChoiceJoueur2 = new JComboBox(tabColorsStringBase);
+        
+        
         cst.gridx = 0;
         cst.gridwidth = 1;
         cst.gridy = 2;
@@ -204,13 +212,8 @@ public class Fenetre extends JFrame implements ActionListener{
         
         
         
-        
-        //if ( colorChoiceJoueur1.getSelectedItem() == colorChoiceJoueur2.getSelectedItem() ){
-        //    rentrerNomJoueursSubmit.setEnabled(false);
-        //}else{
-        //    rentrerNomJoueursSubmit.setEnabled(false);
-        //}
         // Bouton de confirmation
+        
         cst.gridx = 0;
         cst.gridy = 3;
         cst.gridwidth = 2;
@@ -236,9 +239,11 @@ public class Fenetre extends JFrame implements ActionListener{
         }
         
         if (ae.getSource() == rentrerNomJoueursSubmit){
-            this.partie.initNomJoueurs(rentrerNomJoueur1Field.getText(), rentrerNomJoueur2Field.getText());
+            if ( colorChoiceJoueur1.getSelectedItem() != colorChoiceJoueur2.getSelectedItem() ){
+                Color tabColors[] = {Color.BLUE, Color.CYAN, Color.RED, Color.GREEN, Color.ORANGE, Color.PINK, Color.MAGENTA, Color.DARK_GRAY};
+                this.partie.initNomJoueurs(rentrerNomJoueur1Field.getText(), tabColors[colorChoiceJoueur1.getSelectedIndex()], rentrerNomJoueur2Field.getText(), tabColors[colorChoiceJoueur2.getSelectedIndex()]);
+            }
         }
-        
         
         
         
@@ -275,4 +280,5 @@ public class Fenetre extends JFrame implements ActionListener{
     	this.revalidate();
         this.repaint();
     }
+
 }

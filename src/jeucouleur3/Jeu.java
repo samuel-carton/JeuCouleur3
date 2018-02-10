@@ -27,11 +27,12 @@ public class Jeu {
     private boolean joueursInitialized;
 
     private Fenetre fen;
+    private Pion dernierPion;
 
     public Jeu() {
         this.fen = new Fenetre(this);
         plateau_de_jeu = new Grille();
-
+        this.dernierPion = new Pion();
         // Initialisation des joueurs
         this.joueursInitialized = false;
         fen.initJoueurs();
@@ -77,10 +78,10 @@ public class Jeu {
         fen.rentrerNomJoueurs();
     }
 
-    public void initNomJoueurs(String nomJoueur1, String nomJoueur2) {
+    public void initNomJoueurs(String nomJoueur1, Color couleurJoueur1, String nomJoueur2, Color couleurJoueur2) {
         this.joueur1.setNom(nomJoueur1);
-        this.joueur1.setCouleurAttribuee(Color.BLUE);
-        this.joueur2.setCouleurAttribuee(Color.RED);
+        this.joueur1.setCouleurAttribuee(couleurJoueur1);
+        this.joueur2.setCouleurAttribuee(couleurJoueur2);
         this.joueur2.setNom(nomJoueur2);
         this.joueursInitialized = true;
         start();
@@ -104,7 +105,9 @@ public class Jeu {
         if (verifCoup(NbColonne)) {
             for (int i = 5; i >= 0; i--) {
                 if (this.plateau_de_jeu.getPion(NbColonne, i) == null) {
-                    this.plateau_de_jeu.setPion(NbColonne, i, new Pion(this.turn.getCouleurAttribuee()));
+                    dernierPion.setCouleur(this.turn.getCouleurAttribuee());
+                    this.plateau_de_jeu.setPion(NbColonne, i, dernierPion);
+                    
                     break;
                 }
             }
