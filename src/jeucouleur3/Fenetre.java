@@ -203,11 +203,11 @@ public class Fenetre extends JFrame implements ActionListener{
         
         
         
-        if ( colorChoiceJoueur1.getSelectedItem() == colorChoiceJoueur2.getSelectedItem() ){
-            rentrerNomJoueursSubmit.setEnabled(false);
-        }else{
-            rentrerNomJoueursSubmit.setEnabled(false);
-        }
+        //if ( colorChoiceJoueur1.getSelectedItem() == colorChoiceJoueur2.getSelectedItem() ){
+        //    rentrerNomJoueursSubmit.setEnabled(false);
+        //}else{
+        //    rentrerNomJoueursSubmit.setEnabled(false);
+        //}
         // Bouton de confirmation
         cst.gridx = 0;
         cst.gridy = 3;
