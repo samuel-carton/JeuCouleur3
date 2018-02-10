@@ -199,7 +199,7 @@ public class Fenetre extends JFrame implements ActionListener{
         
         colorChoiceJoueur1 = new JComboBox(tabColorsStringBase);
         colorChoiceJoueur2 = new JComboBox(tabColorsStringBase);
-        
+        colorChoiceJoueur1.setSelectedIndex(2);
         
         cst.gridx = 0;
         cst.gridwidth = 1;
