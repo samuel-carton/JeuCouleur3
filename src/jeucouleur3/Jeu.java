@@ -110,7 +110,7 @@ public class Jeu {
             for (int i = 5; i >= 0; i--) {
                 if (this.plateau_de_jeu.getPion(NbColonne, i) == null) {
                     dernierPion.setCouleur(this.turn.getCouleurAttribuee());
-                    this.plateau_de_jeu.setPion(NbColonne, i, dernierPion);
+                    this.plateau_de_jeu.setPion(NbColonne, i, new Pion(this.turn.getCouleurAttribuee()));
                     
                     break;
                 }
@@ -140,6 +140,7 @@ public class Jeu {
         }
         for (int i = 5; i >= 0; i--) {
             if (this.plateau_de_jeu.getPion(tmpCol, i) == null) {
+                dernierPion.setCouleur(this.turn.getCouleurAttribuee());
                 this.plateau_de_jeu.setPion(tmpCol, i, new Pion(this.turn.getCouleurAttribuee()));
                 break;
             }
