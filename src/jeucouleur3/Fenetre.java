@@ -256,7 +256,18 @@ public class Fenetre extends JFrame implements ActionListener{
     public void AffichagePartie() {
     	c.removeAll();
     	
+    	if(this.partie.getTurn() == this.partie.getJoueur1()) {
+    		this.labelNomJoueur1.setOpaque(true);
+    		this.labelNomJoueur2.setOpaque(false);
+        	this.labelNomJoueur1.setBackground(this.partie.getJoueur1().getCouleurAttribuee());
+    	}
+    	else {
+    		this.labelNomJoueur2.setOpaque(true);
+    		this.labelNomJoueur1.setOpaque(false);
+        	this.labelNomJoueur2.setBackground(this.partie.getJoueur2().getCouleurAttribuee());
+    	}
     	this.labelNomJoueur1.setText(this.partie.getJoueur1().getNom());
+    	
         cst.gridx = 0;
         cst.gridy = 0;
         cst.gridwidth = 3;
