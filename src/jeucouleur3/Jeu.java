@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  *
  * @author Loris
  */
-public class Partie {
+public class Jeu {
 
     private Joueur joueur1;
     private Joueur joueur2;
@@ -28,7 +28,7 @@ public class Partie {
 
     private Fenetre fen;
 
-    public Partie() {
+    public Jeu() {
         this.fen = new Fenetre(this);
         plateau_de_jeu = new Grille();
 
@@ -107,6 +107,7 @@ public class Partie {
                     break;
                 }
             }
+            
             // chercheCouleur3(); et vérification de la victoire
             turn = (this.turn == joueur1) ? joueur2 : joueur1;
             fen.AffichagePartie();
@@ -123,7 +124,7 @@ public class Partie {
         //    
         //    TimeUnit.SECONDS.sleep(1);
         //} catch (InterruptedException ex) {
-        //    Logger.getLogger(Partie.class.getName()).log(Level.SEVERE, null, ex);
+        //    Logger.getLogger(Jeu.class.getName()).log(Level.SEVERE, null, ex);
         //}
         int tmpCol = 0;
         while ( ! verifCoup(tmpCol) ){

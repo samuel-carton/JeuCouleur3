@@ -5,6 +5,7 @@
  */
 package jeucouleur3;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Event;
 import java.awt.FlowLayout;
@@ -14,6 +15,7 @@ import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -27,17 +29,21 @@ public class Fenetre extends JFrame implements ActionListener{
     private Grille grille;
     private GridBagConstraints cst;
     private Container c;
-    private Partie partie;
+    private Jeu partie;
+    
+    
     
     // Grille de Label
     private Jeton[][] grilleGraphique;
     
-    // Pour rentrer le nom
+    // Pour rentrer le nom et choisir la couleur
     private JLabel labelRentrerNomJoueur1;
     private JLabel labelRentrerNomJoueur2;
     private JTextField rentrerNomJoueur1Field;
     private JTextField rentrerNomJoueur2Field;
     private JButton rentrerNomJoueursSubmit;
+    private JComboBox colorChoiceJoueur1;
+    private JComboBox colorChoiceJoueur2;
     
     // Dans le hub
     private JLabel labelNomJoueur1;
@@ -50,7 +56,7 @@ public class Fenetre extends JFrame implements ActionListener{
     // Boutons Colonnes
     private JButton[] boutonsColonnes;
     
-    public Fenetre(Partie p){
+    public Fenetre(Jeu p){
         setSize(500,500);
         setTitle("Puissance 3 !! Alignez-en trois, et c'est gagné !");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -64,6 +70,8 @@ public class Fenetre extends JFrame implements ActionListener{
         // Allocation
         placeholdingy = new JLabel("Je ne sers à rien !");
         c = getContentPane(); // Container
+        
+        // Noms des Joueurs
         labelRentrerNomJoueur1 = new JLabel("Player One");
         labelRentrerNomJoueur2 = new JLabel("Player Two");
         rentrerNomJoueur1Field = new JTextField(20);
@@ -73,7 +81,13 @@ public class Fenetre extends JFrame implements ActionListener{
         labelNomJoueur1 = new JLabel();
         labelNomJoueur2 = new JLabel();
         
+        
+        // Jeu [ HUB ]
         SetupGrilleGraphique();
+        
+        // Choix des couleurs attribuées à chaque joueur
+        colorChoiceJoueur1 = new JComboBox();
+        colorChoiceJoueur2 = new JComboBox();
         
         // Choix de partie
         partieContreAI = new JButton("Partie avec AI");
@@ -153,6 +167,8 @@ public class Fenetre extends JFrame implements ActionListener{
     // TODO
     public void rentrerNomJoueurs(){
         c.removeAll();
+        
+        // Noms de joueurs + AI ( Label et TextField non modifiable)
         cst.gridx = 0;
         cst.gridy = 0;
         c.add(this.labelRentrerNomJoueur1, cst);
@@ -167,15 +183,42 @@ public class Fenetre extends JFrame implements ActionListener{
         }
         cst.gridx = 1;
         c.add(this.rentrerNomJoueur2Field, cst);
+        
+        
+        
+        // Choix des couleurs attribuées
+        Color tabColors[] = {Color.BLUE, Color.CYAN, Color.RED, Color.GREEN, Color.ORANGE, Color.PINK, Color.MAGENTA, Color.DARK_GRAY};
+        String tabColorsString[] = {"BLUE", "CYAN", "RED", "GREEN", "ORANGE", "PINK", "MAGENTA", "DARK_GRAY"};
+        colorChoiceJoueur1 = new JComboBox(tabColorsString);
+        colorChoiceJoueur2 = new JComboBox(tabColorsString);
         cst.gridx = 0;
+        cst.gridwidth = 1;
         cst.gridy = 2;
+        c.add(this.colorChoiceJoueur1, cst);
+        
+        cst.gridx = 1;
+        c.add(this.colorChoiceJoueur2, cst);
+        
+        
+        
+        
+        
+        if ( colorChoiceJoueur1.getSelectedItem() == colorChoiceJoueur2.getSelectedItem() ){
+            rentrerNomJoueursSubmit.setEnabled(false);
+        }else{
+            rentrerNomJoueursSubmit.setEnabled(false);
+        }
+        // Bouton de confirmation
+        cst.gridx = 0;
+        cst.gridy = 3;
+        cst.gridwidth = 2;
         c.add(this.rentrerNomJoueursSubmit, cst);
         this.setContentPane(c);
         this.revalidate();
         this.repaint();
     }
     
-    public void setPartie(Partie partie){
+    public void setPartie(Jeu partie){
         this.partie = partie;
     }
 

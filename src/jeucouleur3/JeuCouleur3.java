@@ -22,7 +22,7 @@ public class JeuCouleur3 {
         System.out.println("Caught in the land slide ...");
         System.out.println("C'est pas vrai !");
         
-        Partie game = new Partie();
+        Jeu game = new Jeu();
         while ( !game.isJoueursInitialized() ){}
         game.start();
     }
