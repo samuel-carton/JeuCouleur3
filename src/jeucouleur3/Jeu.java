@@ -6,6 +6,15 @@
 package jeucouleur3;
 
 import java.awt.Color;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -75,7 +84,25 @@ public class Jeu {
 
     public void initJoueurs(boolean isThereAnyAI) {
         if (isThereAnyAI) {
-            this.joueur1 = new Joueur("Bot McBottyFace", false);
+            String fileName = "src\\jeucouleur3\\Noms IA.txt";
+            try {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
+                String line;
+                ArrayList<String> noms = new ArrayList<String>();
+                while ((line = reader.readLine()) != null) {
+                    System.out.println(line);
+                    noms.add(line);
+                }
+                int randomNumber = (int)Math.floor(Math.random() * noms.size());
+                String nomduBot = noms.get(randomNumber);
+                this.joueur1 = new Joueur(nomduBot, false);
+            } catch (Exception ex) {
+                System.out.println("ERREUR: Le fichier " + fileName + " n'a pas été trouvé. Le bot n'aura donc pas d'originalité.");
+                System.out.println(ex.getMessage());
+                this.joueur1 = new Joueur("Bot Peu Original", false);
+            }
+
+            
             this.joueur2 = new Joueur(true);
         } else {
             this.joueur1 = new Joueur(true);
