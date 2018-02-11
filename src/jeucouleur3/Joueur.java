@@ -50,7 +50,12 @@ public class Joueur {
         this.Human = isHuman;
     }
     
-    
-    
+    public Joueur joueurFromCouleur (Color couleur){
+	if ( this.couleurAttribuee == couleur ){
+            return this;
+        } else {
+            return null;
+        }
+    }
     
 }
