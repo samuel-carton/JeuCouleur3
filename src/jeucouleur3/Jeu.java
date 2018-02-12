@@ -83,6 +83,10 @@ public class Jeu {
         return turn;
     }
 
+    public boolean isPartieFinie() {
+        return partieFinie;
+    }
+    
     //</editor-fold>
     public void initJoueurs(boolean isThereAnyAI) {
         if (isThereAnyAI) {
@@ -289,7 +293,6 @@ public class Jeu {
         }
 
         if (nbCoupsJoues == 36) {
-            afficherMatchNul();
             return "matchnul";
         }
 
@@ -297,6 +300,7 @@ public class Jeu {
     }
 
     public void afficherVictoire(String annonce) {
+        partieFinie = true;
         fen.AffichagePartie();
         //fin de la partie
         JOptionPane jop1 = new JOptionPane();
@@ -305,6 +309,7 @@ public class Jeu {
     }
 
     public void afficherMatchNul() {
+        partieFinie = true;
         fen.AffichagePartie();
         //fin de la partie
         JOptionPane jop1 = new JOptionPane();

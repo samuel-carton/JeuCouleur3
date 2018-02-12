@@ -283,6 +283,9 @@ public class Fenetre extends JFrame implements ActionListener{
         for (int i = 0; i < 6; i++) {
             cst.gridx = i;
             c.add(boutonsColonnes[i], cst);
+            if ( partie.isPartieFinie() ){
+                boutonsColonnes[i].setEnabled(false);
+            }
         }
         
         AffichageGrilleGraphique();
