@@ -9,23 +9,15 @@ package jeucouleur3;
  *
  * @author Loris
  */
-public class JeuCouleur3 {
+public class Main {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
         
-        System.out.println("Is this the real life ?");
-        System.out.println("Is this just fantasy ?");
-        System.out.println("Caught in the land slide ...");
-        System.out.println("C'est pas vrai !");
-        
-        
+        // On initialise ici juste la classe jeu, car elle va instancier la fenètre graphique et lancer la mécanique interne du programme
         Jeu game = new Jeu();
-        //while ( !game.isJoueursInitialized() ){}
-        //game.start();
     }
     
 }

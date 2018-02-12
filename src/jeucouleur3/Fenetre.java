@@ -30,15 +30,13 @@ import javax.swing.JTextField;
  * @author Loris
  */
 public class Fenetre extends JFrame implements ActionListener{
-    private JLabel placeholdingy;
-    private Grille grille;
     private GridBagConstraints cst;
     private Container c;
     private Jeu partie;
     
     
     
-    // Grille de Label
+    // Grille de Jetons - Equivalent graphique du plateau de jeu de la partie
     private Jeton[][] grilleGraphique;
     
     // Pour rentrer le nom et choisir la couleur
@@ -64,16 +62,15 @@ public class Fenetre extends JFrame implements ActionListener{
     public Fenetre(Jeu p){
         setSize(500,500);
         setTitle("Puissance 3 !! Alignez-en trois, et c'est gagné !");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE); // - Pour pouvoir fermer le programme lorqsu'on appuie sur la croix de fermeture
         instanciation();
         this.partie = p;
-        this.setVisible(true);
+        this.setVisible(true); // - Pour afficher la fenêtre
     }
     
     private void instanciation(){
         
         // Allocation
-        placeholdingy = new JLabel("Je ne sers à rien !");
         c = getContentPane(); // Container
         
         // Noms des Joueurs
@@ -123,7 +120,7 @@ public class Fenetre extends JFrame implements ActionListener{
         setContentPane(c);
     }
     
-    public void SetupGrilleGraphique(){
+    public void SetupGrilleGraphique(){ // - Allocation de la grille graphique
         grilleGraphique = new Jeton[6][6];
         for (int i = 0; i < 6; i++) {
             grilleGraphique[i] = new Jeton[6];
@@ -155,7 +152,7 @@ public class Fenetre extends JFrame implements ActionListener{
     }
     
     
-    public void initJoueurs(){
+    public void initJoueurs(){ // - Selection du type de partie
         c.removeAll();
         
         
@@ -174,7 +171,7 @@ public class Fenetre extends JFrame implements ActionListener{
     public void rentrerNomJoueurs(){
         c.removeAll();
         
-        // Noms de joueurs + AI ( Label et TextField non modifiable)
+        // Noms de joueurs + IA ( Label et TextField non modifiables)
         cst.gridx = 0;
         cst.gridy = 0;
         c.add(this.labelRentrerNomJoueur1, cst);
@@ -196,10 +193,10 @@ public class Fenetre extends JFrame implements ActionListener{
         // Color tabColors[] = {Color.BLUE, Color.CYAN, Color.RED, Color.GREEN, Color.ORANGE, Color.PINK, Color.MAGENTA, Color.DARK_GRAY};    -- cf. ActionPerformed
         String tabColorsStringBase[] = {"BLUE", "CYAN", "RED", "GREEN", "ORANGE", "PINK", "MAGENTA", "DARK_GRAY"};
         
-        
+        // Menu déroulant de couleurs à sélectionner
         colorChoiceJoueur1 = new JComboBox(tabColorsStringBase);
         colorChoiceJoueur2 = new JComboBox(tabColorsStringBase);
-        colorChoiceJoueur1.setSelectedIndex(2);
+        colorChoiceJoueur1.setSelectedIndex(2); // - On règle par défaut des couleurs différentes, pour ne pas désactiver par défaut le bouton de validation
         
         cst.gridx = 0;
         cst.gridwidth = 1;
@@ -213,7 +210,6 @@ public class Fenetre extends JFrame implements ActionListener{
         
         
         // Bouton de confirmation
-        
         cst.gridx = 0;
         cst.gridy = 3;
         cst.gridwidth = 2;
@@ -226,33 +222,7 @@ public class Fenetre extends JFrame implements ActionListener{
     public void setPartie(Jeu partie){
         this.partie = partie;
     }
-
-    @Override
-    public void actionPerformed(ActionEvent ae) {
-        if (ae.getSource() == partieContreAI){
-            System.out.println("Vous avez choisi une partie contre un Ordinateur !");
-            this.partie.initJoueurs(true);
-        }
-        if (ae.getSource() == partieEntre2Joueurs){
-            System.out.println("Vous avez choisi une partie entre deux joueurs, que le meilleur gagne !");
-            this.partie.initJoueurs(false);
-        }
-        
-        if (ae.getSource() == rentrerNomJoueursSubmit){
-            if ( colorChoiceJoueur1.getSelectedItem() != colorChoiceJoueur2.getSelectedItem() ){
-                Color tabColors[] = {Color.BLUE, Color.CYAN, Color.RED, Color.GREEN, Color.ORANGE, Color.PINK, Color.MAGENTA, Color.DARK_GRAY};
-                this.partie.initNomJoueurs(rentrerNomJoueur1Field.getText(), tabColors[colorChoiceJoueur1.getSelectedIndex()], rentrerNomJoueur2Field.getText(), tabColors[colorChoiceJoueur2.getSelectedIndex()]);
-            }
-        }
-        
-        
-        
-        for (int i = 0; i < 6; i++) {
-            if ( ae.getSource() == boutonsColonnes[i] ) partie.jouerUnCoup(i);
-        }
-    }
     
- 
     public void AffichagePartie() {
     	c.removeAll();
     	
@@ -294,5 +264,29 @@ public class Fenetre extends JFrame implements ActionListener{
     	this.revalidate();
         this.repaint();
     }
-
+    
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getSource() == partieContreAI){
+            System.out.println("Vous avez choisi une partie contre un Ordinateur !");
+            this.partie.initJoueurs(true);
+        }
+        if (ae.getSource() == partieEntre2Joueurs){
+            System.out.println("Vous avez choisi une partie entre deux joueurs, que le meilleur gagne !");
+            this.partie.initJoueurs(false);
+        }
+        
+        if (ae.getSource() == rentrerNomJoueursSubmit){
+            if ( colorChoiceJoueur1.getSelectedItem() != colorChoiceJoueur2.getSelectedItem() ){
+                Color tabColors[] = {Color.BLUE, Color.CYAN, Color.RED, Color.GREEN, Color.ORANGE, Color.PINK, Color.MAGENTA, Color.DARK_GRAY}; // - Pour faire la liaison entre la couleur choisie [String] et une instance de la classe Color
+                this.partie.initNomJoueurs(rentrerNomJoueur1Field.getText(), tabColors[colorChoiceJoueur1.getSelectedIndex()], rentrerNomJoueur2Field.getText(), tabColors[colorChoiceJoueur2.getSelectedIndex()]);
+            }
+        }
+        
+        
+        
+        for (int i = 0; i < 6; i++) {
+            if ( ae.getSource() == boutonsColonnes[i] ) partie.jouerUnCoup(i);
+        }
+    }
 }

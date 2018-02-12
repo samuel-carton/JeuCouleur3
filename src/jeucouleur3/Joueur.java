@@ -16,6 +16,7 @@ public class Joueur {
     private Color couleurAttribuee;
     private boolean Human;
     
+    // - Constructeurs
     public Joueur(String nom, boolean Human){
         this.nom = nom;
         this.Human = Human;
@@ -25,7 +26,7 @@ public class Joueur {
         this.Human = Human;
     }
     
-    
+    //<editor-fold desc="Getters & Setters">
     public String getNom() {
         return nom;
     }
@@ -49,6 +50,7 @@ public class Joueur {
     public void setHuman(boolean isHuman) {
         this.Human = isHuman;
     }
+    //</editor-fold>
     
     public Joueur joueurFromCouleur (Color couleur){
 	if ( this.couleurAttribuee == couleur ){

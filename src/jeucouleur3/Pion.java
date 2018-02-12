@@ -7,7 +7,7 @@ public class Pion {
     private int x;
     private int y;
     
-    // - Constructors
+    // - Constructeurs
     public Pion(){
         
     }
@@ -17,7 +17,7 @@ public class Pion {
         this.couleur = couleur;
     }
 
-    // - Getters n' Setters
+    //<editor-fold desc="Getters & Setters">
     public Color getCouleur() {
         return couleur;
     }
@@ -36,7 +36,7 @@ public class Pion {
     public int getY() {
         return y;
     }
-    
+    //</editor-fold>
     
 
     @Override
